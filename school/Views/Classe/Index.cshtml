@@ -1,0 +1,58 @@
+﻿@model IEnumerable<school.Models.Classe>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br /><br /><br />
+            <div class="row">
+
+                <div class="col-6">
+                    <h2 class="text-info">List of Classe</h2>
+                </div>
+
+                 <div class="col-6 text-right">
+                        <a class="btn btn-info" asp-action="Create"> Add new Class</a>
+                 </div>
+                <br />
+                <div class="col-12">
+
+                    <table class="table table-striped border">
+                        <tr class="table-info">
+                            <th>
+                                @Html.DisplayNameFor(m => m.id)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(m => m.name)
+                            </th>
+                           
+                            <th>
+
+                            </th>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                         <tr>
+                            <td>
+                                @Html.DisplayFor(m => item.id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.name)
+                            </td>
+                         
+
+                            <td class="text-right">
+                                <div class="btn-group" role="group">
+                                    <a type="button" class="btn btn-primary" href="@Url.Action("Edit/"+item.id)">Edit</a>
+                                    <form method="post" action="Delete">
+                                        <input onclick="if (!confirm('Are you sure')) { return false }" type="submit" class="btn btn-danger rounded-0" asp-action="Delete" asp-route-id="@item.id" value="Delete"/>
+                                    </form>
+                                </div>
+                             </td>
+
+                        </tr>
+                        }
+                    </table>
+                </div>
+            </div>
